@@ -18,24 +18,6 @@ public class RachelWeatherController {
         openWeatherConnector = new OpenWeatherConnector();
     }
 
-    public void authenticate(Map<String, String> headers) {
-        if (headers.containsKey("authorization") && headers.get("authorization").contains("Bearer")) {
-            String authorizationHeader = headers.get("authorization");
-            int indexOfBearer = authorizationHeader.indexOf("Bearer") + 7;
-            int endOfBearer = authorizationHeader.indexOf("[^\\W_]+", indexOfBearer);
-            String bearerToken;
-            if (endOfBearer == -1) {
-                bearerToken = authorizationHeader.substring(indexOfBearer);
-            } else {
-                bearerToken = authorizationHeader.substring(indexOfBearer, endOfBearer);
-            }
-            if (bearerToken.length() == 20) {
-                return;
-            }
-        }
-        throw new ResponseStatusException(HttpStatus.UNAUTHORIZED);
-    }
-
     @GetMapping("/currentweather/{zip}")
     public String getCurrentWeather(@PathVariable String zip, @RequestHeader Map<String, String> headers)
             throws Exception {
@@ -63,5 +45,23 @@ public class RachelWeatherController {
             response.append(System.getProperty("line.separator")).append(day.toString());
         }
         return response.toString();
+    }
+
+    private void authenticate(Map<String, String> headers) {
+        if (headers.containsKey("authorization") && headers.get("authorization").contains("Bearer")) {
+            String authorizationHeader = headers.get("authorization");
+            int indexOfBearer = authorizationHeader.indexOf("Bearer") + 7;
+            int endOfBearer = authorizationHeader.indexOf("[^\\W_]+", indexOfBearer);
+            String bearerToken;
+            if (endOfBearer == -1) {
+                bearerToken = authorizationHeader.substring(indexOfBearer);
+            } else {
+                bearerToken = authorizationHeader.substring(indexOfBearer, endOfBearer);
+            }
+            if (bearerToken.length() == 20) {
+                return;
+            }
+        }
+        throw new ResponseStatusException(HttpStatus.UNAUTHORIZED);
     }
 }

@@ -51,7 +51,7 @@ public class OpenWeatherConnector {
         List<ForecastWeatherSpecifications> completeForecast = new ArrayList<>();
         for (int i = 0; i < 14; i++) {
             JSONObject day = forecastList.getJSONObject(i);
-            Date date = new Date(day.getLong("dt"));
+            Date date = new Date(day.getLong("dt") * 1000);
             JSONObject temp = day.getJSONObject("temp");
             double high = temp.getDouble("max");
             double low = temp.getDouble("min");
