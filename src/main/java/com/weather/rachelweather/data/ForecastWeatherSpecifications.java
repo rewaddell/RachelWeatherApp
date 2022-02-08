@@ -28,7 +28,7 @@ public class ForecastWeatherSpecifications {
     @Override
     public String toString() {
         return String.format(
-                "Date (UTC): %s\nHigh: %3.1f, Low: %3.1f, Humidity: %d%%\n Wind: Speed: %3.1f, Degree: %d",
+                "Date: %s\nHigh: %3.1f, Low: %3.1f, Humidity: %d%%\n Wind: Speed: %3.1f, Degree: %d",
                 date.toString(),
                 high,
                 low,
