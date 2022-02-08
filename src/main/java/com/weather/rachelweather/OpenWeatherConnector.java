@@ -1,5 +1,3 @@
-// adapted from Meteomatics documentation
-// https://github.com/meteomatics/java-connector-api/blob/master/MeteomaticsExample.java
 package com.weather.rachelweather;
 
 import com.weather.rachelweather.data.CurrentWeatherResponse;
